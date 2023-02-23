@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/components/icon_placeholder.dart';
-import 'package:victor_amorim_portifolio/components/skeleton/skeleton_head_tab.dart';
+import 'package:victor_amorim_portifolio/components/android_icon_button.dart';
+import 'package:victor_amorim_portifolio/components/skeleton/skeleton_menu_top_bar.dart';
+import 'package:victor_amorim_portifolio/components/vertical_divider_v2.dart';
 import 'package:victor_amorim_portifolio/core/theme/theme_color.dart';
 
 class SkeletonLeftBody extends StatefulWidget {
@@ -20,13 +21,10 @@ class _SkeletonLeftBodyState extends State<SkeletonLeftBody> {
     super.initState();
     lightColor = ThemeColor.primaryColor[500];
     darkColor = ThemeColor.primaryColor[800];
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _widthController =
-        ValueNotifier<double>(MediaQuery.of(context).size.width * .2);
+    _widthController = ValueNotifier<double>(0.0);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _widthController.value = MediaQuery.of(context).size.width * .2;
+    });
   }
 
   @override
@@ -80,46 +78,28 @@ class _SideContent extends StatelessWidget {
         color: ThemeColor.primaryColor[500],
         child: Column(
           children: [
-            SkeletonHeadTab(
+            SkeletonMenuTopBar(
               width: width,
-              children: [
-                Row(
-                  children: const [
-                    IconPlaceholder(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Text("Project"),
-                    ),
-                    Icon(Icons.arrow_drop_down)
-                  ],
+              border: Border(
+                  bottom: BorderSide(color: ThemeColor.primaryColor[800]!)),
+              leftChildren: const [
+                AndroidIconButton(
+                  icon: Icon(Icons.desktop_windows,),
+                  isActivated: false,
                 ),
-                const Spacer(),
-                Row(
-                  children: [
-                    ...List.generate(
-                        3,
-                        (index) => const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.0),
-                              child: IconPlaceholder(),
-                            )),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 5.0),
-                      child: VerticalDivider(
-                        color: ThemeColor.primaryColor[400],
-                        width: 1,
-                      ),
-                    ),
-                    ...List.generate(
-                        2,
-                        (index) => Padding(
-                              padding: EdgeInsets.only(
-                                  right: index != 1 ? 10.0 : 0,
-                                  left: index == 0 ? 5 : 0),
-                              child: const IconPlaceholder(),
-                            ))
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Text("Project"),
                 ),
+                Icon(Icons.arrow_drop_down)
+              ],
+              rightChildren: const [
+                AndroidIconButton(icon: Icon(Icons.circle_outlined)),
+                AndroidIconButton(icon: Icon(Icons.unfold_more)),
+                AndroidIconButton(icon: Icon(Icons.unfold_less)),
+                VerticalDividerV2(),
+                AndroidIconButton(icon: Icon(Icons.settings)),
+                AndroidIconButton(icon: Icon(Icons.remove))
               ],
             ),
             Container(color: ThemeColor.primaryColor[500]),

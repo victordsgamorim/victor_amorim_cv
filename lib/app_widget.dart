@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/core/theme/theme.dart';
 import 'package:victor_amorim_portifolio/components/skeleton/skeleton_page.dart';
+import 'package:victor_amorim_portifolio/core/theme/theme.dart';
 
-class VictorAmorimCV extends StatelessWidget {
-  const VictorAmorimCV({Key? key}) : super(key: key);
+class AndroidStudioClone extends StatelessWidget {
+  const AndroidStudioClone({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Android Studio Clone',
       theme: theme,
-      home: const ResizeContainer(),
+      // debugShowCheckedModeBanner: kDebugMode,
+      debugShowCheckedModeBanner: false,
+      home: const AndroidStudio(),
     );
   }
 }
