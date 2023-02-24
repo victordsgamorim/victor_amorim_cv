@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/core/theme/theme_color.dart';
+import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
 
 class VerticalDividerV2 extends StatelessWidget {
   const VerticalDividerV2({super.key});
@@ -16,7 +16,7 @@ class VerticalDividerV2 extends StatelessWidget {
 class _CustomVerticalDivider extends VerticalDivider {
   _CustomVerticalDivider()
       : super(
-          color: ThemeColor.primaryColor[400],
+          color: ThemeColour.primaryColor[400],
           width: 1,
         );
 }

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/components/android_icon_button.dart';
-import 'package:victor_amorim_portifolio/components/icon_placeholder.dart';
-import 'package:victor_amorim_portifolio/components/rotate_side_button.dart';
-import 'package:victor_amorim_portifolio/components/skeleton/skeleton_menu_side_bar.dart';
+import 'package:victor_amorim_portifolio/ui/components/android_icon_button.dart';
+import 'package:victor_amorim_portifolio/ui/components/rotate_side_button.dart';
+import 'package:victor_amorim_portifolio/ui/skeleton/widgets/skeleton_menu_vertical_bar.dart';
 
 class SkeletonRightMenuBar extends StatelessWidget {
   const SkeletonRightMenuBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SkeletonMenuSideBar(menus: [
+    return SkeletonMenuVerticalBar(menus: [
       RotatedSideButton.clockwise(
         title: 'Flutter Outline',
         icon: const AndroidIconButton(
+          padding: EdgeInsets.zero,
           icon: FlutterLogo(),
           isActivated: false,
         ),
@@ -21,6 +21,7 @@ class SkeletonRightMenuBar extends StatelessWidget {
         title: 'Flutter Performance',
         icon: AndroidIconButton.dot(
           icon: const FlutterLogo(),
+          padding: EdgeInsets.zero,
           radius: 9,
           isActivated: false,
         ),
@@ -34,6 +35,7 @@ class SkeletonRightMenuBar extends StatelessWidget {
         icon: AndroidIconButton.dot(
           icon: const FlutterLogo(),
           radius: 9,
+          padding: EdgeInsets.zero,
           isActivated: false,
         ),
       ),

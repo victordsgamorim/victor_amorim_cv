@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/core/theme/theme_color.dart';
+import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
+import 'package:victor_amorim_portifolio/ui/components/android_large_button.dart';
 
 class ElevatedButtonBorder extends StatelessWidget {
   final Widget icon;
-  final List<String> titles;
+  final String title;
   final bool isActivated;
 
   const ElevatedButtonBorder({
     super.key,
     required this.icon,
-    required this.titles,
+    required this.title,
     this.isActivated = true,
   });
 
@@ -18,23 +19,17 @@ class ElevatedButtonBorder extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: ThemeColor.primaryColor[300]!),
+          border: Border.all(color: ThemeColour.primaryColor[300]!),
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 3, 4, 3),
+          padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
           child: Opacity(
             opacity: isActivated ? 1 : .3,
             child: Row(
               children: [
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: FittedBox(
-                    child: icon,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Text(titles[0]),
+                AndroidLargeButton(
+                  icon: icon,
+                  title: title,
                 ),
                 const Icon(Icons.arrow_drop_down),
               ],

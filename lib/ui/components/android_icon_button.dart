@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/core/theme/theme_color.dart';
+import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
+
+const _iconPadding = EdgeInsets.fromLTRB(4, 2, 4, 2);
 
 class AndroidIconButton extends StatefulWidget {
   final Widget icon;
   final double? radius;
   final bool isActivated;
   final EdgeInsets padding;
+  final VoidCallback? onTap;
 
   const AndroidIconButton({
     super.key,
     required this.icon,
     this.radius,
     this.isActivated = true,
-    this.padding = const EdgeInsets.fromLTRB(4, 2, 4, 2),
+    this.padding = _iconPadding,
+    this.onTap,
   });
 
   factory AndroidIconButton.dot({
     required Widget icon,
     bool isActivated = true,
     double radius = 6,
+    VoidCallback? onTap,
+    EdgeInsets padding = _iconPadding
   }) {
     return AndroidIconButton(
       icon: icon,
       radius: radius,
       isActivated: isActivated,
+      onTap: onTap,
+      padding: padding,
     );
   }
 
@@ -37,36 +45,37 @@ class _AndroidIconButtonState extends State<AndroidIconButton> {
   @override
   void initState() {
     super.initState();
-    _colorController = ValueNotifier<Color?>(ThemeColor.primaryColor[500]);
+    _colorController = ValueNotifier<Color?>(ThemeColour.primaryColor[500]);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: widget.padding,
-      child: IgnorePointer(
-        ignoring: !widget.isActivated,
-        child: MouseRegion(
-          onEnter: (_) => _colorController.value = ThemeColor.primaryColor[300],
-          onExit: (_) => _colorController.value = ThemeColor.primaryColor[500],
-          child: ValueListenableBuilder(
-              valueListenable: _colorController,
-              child: widget.radius != null
-                  ? _DropDot(icon: widget.icon, radius: widget.radius!)
-                  : widget.icon,
-              builder: (_, color, child) {
-                return Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                      color: color!.withOpacity(0.4),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(2),
-                      )),
-                  child: FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: child),
-                );
-              }),
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Padding(
+        padding: widget.padding,
+        child: IgnorePointer(
+          ignoring: !widget.isActivated,
+          child: MouseRegion(
+            onEnter: (_) => _colorController.value =
+                ThemeColour.primaryColor[300]!.withOpacity(0.4),
+            onExit: (_) => _colorController.value = Colors.transparent,
+            child: ValueListenableBuilder(
+                valueListenable: _colorController,
+                child: widget.radius != null
+                    ? _DropDot(icon: widget.icon, radius: widget.radius!)
+                    : widget.icon,
+                builder: (_, color, child) {
+                  return Container(
+                    decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(2),
+                        )),
+                    child: FittedBox(fit: BoxFit.fitHeight, child: child),
+                  );
+                }),
+          ),
         ),
       ),
     );

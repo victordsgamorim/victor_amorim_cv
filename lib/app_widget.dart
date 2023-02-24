@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/components/skeleton/skeleton_page.dart';
 import 'package:victor_amorim_portifolio/core/theme/theme.dart';
+import 'package:victor_amorim_portifolio/ui/skeleton/skeleton_page.dart';
 
 class AndroidStudioClone extends StatelessWidget {
   const AndroidStudioClone({Key? key}) : super(key: key);
@@ -10,9 +10,8 @@ class AndroidStudioClone extends StatelessWidget {
     return MaterialApp(
       title: 'Android Studio Clone',
       theme: theme,
-      // debugShowCheckedModeBanner: kDebugMode,
       debugShowCheckedModeBanner: false,
-      home: const AndroidStudio(),
+      home: AndroidStudio(),
     );
   }
 }

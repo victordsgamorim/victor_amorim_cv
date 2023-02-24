@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeColor {
+class ThemeColour {
   static const MaterialColor primaryColor = MaterialColor(
     0xff45474b,
     <int, Color>{

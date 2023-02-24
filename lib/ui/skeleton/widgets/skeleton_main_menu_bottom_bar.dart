@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/components/rotate_side_button.dart';
-import 'package:victor_amorim_portifolio/components/skeleton/skeleton_menu_top_bar.dart';
-import 'package:victor_amorim_portifolio/core/theme/theme_color.dart';
+import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
+import 'package:victor_amorim_portifolio/ui/components/rotate_side_button.dart';
+import 'package:victor_amorim_portifolio/ui/skeleton/widgets/skeleton_menu_horizontal_bar.dart';
 
 class SkeletonMainMenuBottomBar extends StatelessWidget {
   const SkeletonMainMenuBottomBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SkeletonMenuTopBar(
+    return SkeletonMenuHorizontalBar(
       width: MediaQuery.of(context).size.width,
       height: 20,
-      border: Border(top: BorderSide(color: ThemeColor.primaryColor[800]!)),
+      border: Border(top: BorderSide(color: ThemeColour.primaryColor[800]!)),
       padding: const EdgeInsets.fromLTRB(20, 2, 5, 0),
       hasBottomBorder: false,
       leftChildren: [

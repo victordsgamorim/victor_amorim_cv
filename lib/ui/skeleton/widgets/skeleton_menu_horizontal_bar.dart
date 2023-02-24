@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:victor_amorim_portifolio/core/theme/theme_color.dart';
+import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
 
-class SkeletonMenuTopBar extends StatelessWidget {
+class SkeletonMenuHorizontalBar extends StatelessWidget {
   final double width;
   final List<Widget> leftChildren;
   final List<Widget> rightChildren;
@@ -10,7 +10,7 @@ class SkeletonMenuTopBar extends StatelessWidget {
   final Border? border;
   final double height;
 
-  const SkeletonMenuTopBar({
+  const SkeletonMenuHorizontalBar({
     super.key,
     required this.width,
     required this.leftChildren,
@@ -18,7 +18,7 @@ class SkeletonMenuTopBar extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 5.0),
     this.hasBottomBorder = true,
     this.border,
-    this.height = 30,
+    this.height = 25,
   });
 
   @override
@@ -28,7 +28,7 @@ class SkeletonMenuTopBar extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         border: border,
-        color: ThemeColor.primaryColor[500],
+        color: ThemeColour.primaryColor[500],
       ),
       child: Padding(
         padding: padding,
@@ -46,7 +46,7 @@ class SkeletonMenuTopBar extends StatelessWidget {
                 top: 0,
                 bottom: 0,
                 child: Container(
-                  color: ThemeColor.primaryColor[500],
+                  color: ThemeColour.primaryColor[500],
                   child: Row(
                     children: rightChildren,
                   ),
