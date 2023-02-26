@@ -3,8 +3,16 @@ import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
 
 class SkeletonMenuVerticalBar extends StatelessWidget {
   final List<Widget> menus;
+  final Map<ShortcutActivator, Intent>? shortcuts;
+  final Map<Type, Action<Intent>>? actions;
 
-  const SkeletonMenuVerticalBar({super.key, required this.menus});
+  const SkeletonMenuVerticalBar({
+    super.key,
+    required this.menus,
+    this.shortcuts,
+    this.actions,
+  }) : assert(actions == null || shortcuts != null,
+            'only implement action with shortcuts');
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +25,16 @@ class SkeletonMenuVerticalBar extends StatelessWidget {
               color: ThemeColour.primaryColor[800]!,
             ),
           )),
-      // alignment: const Alignment(0, -1),
-      child: Column(
-        children: menus,
+      child: Shortcuts(
+        shortcuts: shortcuts ?? {},
+        child: Actions(
+          actions: actions ?? <Type, Action<Intent>>{},
+          child: Focus(
+              autofocus: true,
+              child: Column(
+                children: menus,
+              )),
+        ),
       ),
     );
   }

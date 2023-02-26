@@ -93,7 +93,7 @@ class _AndroidDropdownState<T extends IDropdown>
             width: widget.width,
             child: Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: ThemeColour.primaryColor[800]!)),
+                  border: Border.all(color: ThemeColour.primaryColor[300]!)),
               child: Material(
                 elevation: 4.0,
                 color: ThemeColour.primaryColor[500],

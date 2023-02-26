@@ -13,11 +13,9 @@ class AndroidStudio extends StatelessWidget with GetItMixin {
 
   @override
   Widget build(BuildContext context) {
-    final left =
-        watchX((BehaviourLogic behaviourLogic) => behaviourLogic.leftBehaviour);
-    // final right = watchX(
-    //     (BehaviourLogic behaviourLogic) => behaviourLogic.rightBehaviour);
-
+    final behaviour =
+        watchX((BehaviourLogic behaviourLogic) => behaviourLogic.behaviours);
+    final left = behaviour[MenuType.left];
     return Scaffold(
       body: SafeArea(
         top: true,
@@ -30,7 +28,9 @@ class AndroidStudio extends StatelessWidget with GetItMixin {
                 children: [
                   const SkeletonLeftMenuBar(),
                   Visibility(
-                      visible: left.isOpen, child: const SkeletonLeftBody()),
+                    visible: left != null ? left.isOpen : true,
+                    child: const SkeletonLeftBody(),
+                  ),
                   const SkeletonRightBody(),
                   const SkeletonRightMenuBar(),
                 ],

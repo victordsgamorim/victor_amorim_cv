@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
+import 'package:victor_amorim_portifolio/logic/behavior_logic.dart';
 import 'package:victor_amorim_portifolio/main.dart';
 import 'package:victor_amorim_portifolio/ui/components/android_dropdown.dart';
 import 'package:victor_amorim_portifolio/ui/components/android_icon_button.dart';
@@ -144,7 +145,9 @@ class _SideContent extends StatelessWidget {
                 const AndroidIconButton(icon: Icon(Icons.settings)),
                 AndroidIconButton(
                   icon: const Icon(Icons.remove),
-                  onTap: behaviourLogic.onLeftTap,
+                  onTap: () {
+                    behaviourLogic.onTap(MenuType.left);
+                  },
                 )
               ],
             ),

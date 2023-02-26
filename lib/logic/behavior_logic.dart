@@ -6,12 +6,21 @@ enum MenuType { right, left }
 class MenuBehaviour extends Equatable {
   final int index;
   final bool isOpen;
+  final FocusNode node;
 
-  const MenuBehaviour({this.index = 0, this.isOpen = true});
+  const MenuBehaviour(
+      {required this.index, required this.isOpen, required this.node});
+
+  factory MenuBehaviour.empty() {
+    return MenuBehaviour(index: 0, isOpen: true, node: FocusNode());
+  }
 
   MenuBehaviour copyWith({int? index, bool? isOpen}) {
     return MenuBehaviour(
-        index: index ?? this.index, isOpen: isOpen ?? this.isOpen);
+      index: index ?? this.index,
+      isOpen: isOpen ?? this.isOpen,
+      node: node,
+    );
   }
 
   @override
@@ -19,20 +28,25 @@ class MenuBehaviour extends Equatable {
 }
 
 class BehaviourLogic {
-  late final ValueNotifier<MenuBehaviour> leftBehaviour =
-      ValueNotifier(const MenuBehaviour());
+  late final ValueNotifier<Map<MenuType, MenuBehaviour>> behaviours =
+      ValueNotifier({
+    MenuType.left: MenuBehaviour.empty(),
+    MenuType.right: MenuBehaviour.empty(),
+  });
 
-  late final ValueNotifier<MenuBehaviour> rightBehaviour =
-      ValueNotifier(const MenuBehaviour());
+  void onTap(MenuType type, {int? index}) {
+    final Map<MenuType, MenuBehaviour> updatedBehaviours =
+        Map.from(behaviours.value);
 
-  void onLeftTap({int? index}) {
-    leftBehaviour.value = leftBehaviour.value.copyWith(
+    updatedBehaviours[type] = updatedBehaviours[type]!.copyWith(
       isOpen: index == null
           ? false
-          : (leftBehaviour.value.index == index
-              ? !leftBehaviour.value.isOpen
+          : (updatedBehaviours[type]!.index == index
+              ? !updatedBehaviours[type]!.isOpen
               : true),
       index: index,
     );
+
+    behaviours.value = updatedBehaviours;
   }
 }

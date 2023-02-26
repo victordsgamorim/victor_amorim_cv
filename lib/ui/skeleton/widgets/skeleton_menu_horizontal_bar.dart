@@ -9,6 +9,8 @@ class SkeletonMenuHorizontalBar extends StatelessWidget {
   final bool hasBottomBorder;
   final Border? border;
   final double height;
+  final Map<ShortcutActivator, Intent>? shortcuts;
+  final Map<Type, Action<Intent>>? actions;
 
   const SkeletonMenuHorizontalBar({
     super.key,
@@ -19,7 +21,10 @@ class SkeletonMenuHorizontalBar extends StatelessWidget {
     this.hasBottomBorder = true,
     this.border,
     this.height = 25,
-  });
+    this.shortcuts,
+    this.actions,
+  }) : assert(actions == null || shortcuts != null,
+            'only implement action with shortcuts');
 
   @override
   Widget build(BuildContext context) {
@@ -31,29 +36,36 @@ class SkeletonMenuHorizontalBar extends StatelessWidget {
         color: ThemeColour.primaryColor[500],
       ),
       child: Padding(
-        padding: padding,
-        child: Stack(
-          children: [
-            Positioned(
-                left: 0,
-                top: 0,
-                bottom: 0,
-                child: Row(
-                  children: leftChildren,
-                )),
-            Positioned(
-                right: 0,
-                top: 0,
-                bottom: 0,
-                child: Container(
-                  color: ThemeColour.primaryColor[500],
-                  child: Row(
-                    children: rightChildren,
-                  ),
-                ))
-          ],
-        ),
-      ),
+          padding: padding,
+          child: Shortcuts(
+            shortcuts: shortcuts ?? {},
+            child: Actions(
+              actions: actions ?? <Type, Action<Intent>>{},
+              child: Focus(
+                child: Stack(
+                  children: [
+                    Positioned(
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        child: Row(
+                          children: leftChildren,
+                        )),
+                    Positioned(
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        child: Container(
+                          color: ThemeColour.primaryColor[500],
+                          child: Row(
+                            children: rightChildren,
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          )),
     );
   }
 }
