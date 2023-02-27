@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:victor_amorim_portifolio/logic/behavior_logic.dart';
+import 'package:victor_amorim_portifolio/logic/behaviour/behavior_logic.dart';
+import 'package:victor_amorim_portifolio/logic/behaviour/behaviour.dart';
+import 'package:victor_amorim_portifolio/ui/skeleton/skeleton_bottom_body.dart';
 import 'package:victor_amorim_portifolio/ui/skeleton/widgets/skeleton_left_body.dart';
 import 'package:victor_amorim_portifolio/ui/skeleton/widgets/skeleton_left_menu_bar.dart';
 import 'package:victor_amorim_portifolio/ui/skeleton/widgets/skeleton_main_menu_bottom_bar.dart';
@@ -16,27 +18,34 @@ class AndroidStudio extends StatelessWidget with GetItMixin {
     final behaviour =
         watchX((BehaviourLogic behaviourLogic) => behaviourLogic.behaviours);
     final left = behaviour[MenuType.left];
+    final bottom = behaviour[MenuType.bottom];
     return Scaffold(
       body: SafeArea(
         top: true,
         bottom: true,
         child: Column(
           children: [
-            const SkeletonMainMenuTopBar(),
+            SkeletonMainMenuTopBar(node: FocusNode()),
             Expanded(
               child: Row(
                 children: [
-                  const SkeletonLeftMenuBar(),
+                  SkeletonLeftMenuBar(
+                      node: left != null ? left.node : FocusNode()),
                   Visibility(
                     visible: left != null ? left.isOpen : true,
                     child: const SkeletonLeftBody(),
                   ),
                   const SkeletonRightBody(),
-                  const SkeletonRightMenuBar(),
+                  SkeletonRightMenuBar(node: FocusNode()),
                 ],
               ),
             ),
-            const SkeletonMainMenuBottomBar()
+            Visibility(
+              visible: bottom != null ? bottom.isOpen : false,
+              child: const SkeletonBottomBody(),
+            ),
+            SkeletonMainMenuBottomBar(
+                node: bottom != null ? bottom.node : FocusNode())
           ],
         ),
       ),

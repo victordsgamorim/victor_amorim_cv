@@ -11,6 +11,7 @@ class SkeletonMenuHorizontalBar extends StatelessWidget {
   final double height;
   final Map<ShortcutActivator, Intent>? shortcuts;
   final Map<Type, Action<Intent>>? actions;
+  final FocusNode? node;
 
   const SkeletonMenuHorizontalBar({
     super.key,
@@ -23,6 +24,7 @@ class SkeletonMenuHorizontalBar extends StatelessWidget {
     this.height = 25,
     this.shortcuts,
     this.actions,
+    this.node,
   }) : assert(actions == null || shortcuts != null,
             'only implement action with shortcuts');
 
@@ -42,6 +44,7 @@ class SkeletonMenuHorizontalBar extends StatelessWidget {
             child: Actions(
               actions: actions ?? <Type, Action<Intent>>{},
               child: Focus(
+                focusNode: node,
                 child: Stack(
                   children: [
                     Positioned(

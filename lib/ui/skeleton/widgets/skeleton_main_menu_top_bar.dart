@@ -12,13 +12,17 @@ import 'package:victor_amorim_portifolio/ui/skeleton/widgets/skeleton_menu_horiz
 const _icon = Icon(Icons.phone_android, color: Colors.blue);
 
 class SkeletonMainMenuTopBar extends StatelessWidget {
-  const SkeletonMainMenuTopBar({Key? key}) : super(key: key);
+  final FocusNode node;
+
+  const SkeletonMainMenuTopBar({Key? key, required this.node})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SkeletonMenuHorizontalBar(
+          node: node,
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.fromLTRB(20, 2, 5, 0),
           hasBottomBorder: false,

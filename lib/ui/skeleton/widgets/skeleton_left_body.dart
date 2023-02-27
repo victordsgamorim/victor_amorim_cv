@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:victor_amorim_portifolio/core/constants.dart';
 import 'package:victor_amorim_portifolio/core/theme/theme_colour.dart';
-import 'package:victor_amorim_portifolio/logic/behavior_logic.dart';
+import 'package:victor_amorim_portifolio/logic/behaviour/behaviour.dart';
 import 'package:victor_amorim_portifolio/main.dart';
 import 'package:victor_amorim_portifolio/ui/components/android_dropdown.dart';
 import 'package:victor_amorim_portifolio/ui/components/android_icon_button.dart';
@@ -27,8 +28,12 @@ class _SkeletonLeftBodyState extends State<SkeletonLeftBody> {
     lightColor = ThemeColour.primaryColor[500];
     darkColor = ThemeColour.primaryColor[800];
     _widthController = ValueNotifier<double>(0.0);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _widthController.value = MediaQuery.of(context).size.width * .25;
+      if (MediaQuery.of(context).size.width < kIsDesktop) {
+        behaviourLogic.onTap(MenuType.left);
+      }
     });
   }
 

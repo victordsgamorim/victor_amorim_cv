@@ -16,4 +16,6 @@ class ThemeColour {
       900: Color(0xFF202122),
     },
   );
+
+  static const Color barColour = Color(0xff485464);
 }
